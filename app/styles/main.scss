@@ -13,7 +13,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 /* Space out content a bit */
 body {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -92,9 +92,35 @@ body {
 }
 
 .nav li a {
-  padding: 4px 10px;
+  padding: 8px 11px;
 }
 
+.sub-container {
+  margin-top: 3px;
+}
+
+.fixed_bottom {
+  margin-bottom: 0;
+  border-width: 1px 0 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.search-result {
+  margin-top: 5px;
+}
+
+.navbar-footer {
+  background-color: #eee;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .tooltip {
   @include make-xs-column(1, 10px);
 }
@@ -110,6 +136,30 @@ body {
 }
 
 .btn-sm-default {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  &:not(.active) {
+    background-color: $btn-default-bg;
+  }
+  padding: 6px 14px 6px 14px;
+}
+
+.btn-sm-single {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  &:not(.active) {
+    background-color: $btn-default-bg;
+  }
+  padding: 6px 12px 6px 12px;
+}
+
+.btn-sm-narrow {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  &:not(.active) {
+    background-color: $btn-default-bg;
+  }
+  padding: 6px 10px 6px 10px;
+}
+
+.btn-sm-sort {
   @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
   &:not(.active) {
     background-color: $btn-default-bg;

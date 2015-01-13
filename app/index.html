@@ -15,7 +15,7 @@
   <!-- endbuild -->
 </head>
 
-<body ng-app="sengokusearchApp">
+<body ng-app="sengokusearchApp" id="top">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
@@ -25,184 +25,226 @@
 
 <div class="container" ng-controller="searchCtrl">
 
+  <div class="navbar-fixed-bottom btn-group navbar-right" role="group" aria-label="..." ng-controller="ScrollController">
+    <button type="button" class="btn btn-default" ng-click="gotoBottom()">
+      top
+    </button>
+  </div>
+
+  <!--
+  <nav class="navbar navbar-footer navbar-fixed-bottom">
+  -->
+
   <tabset>
     <tab heading="武家">
-
-  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi.flag" btn-checkbox>豊臣</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_bunti.flag" btn-checkbox>文治</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_budan.flag" btn-checkbox>武断</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tokugawa.flag" btn-checkbox>徳川</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_oda.flag" btn-checkbox>織田</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_takeda.flag" btn-checkbox>武田</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_uesugi.flag" btn-checkbox>上杉</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_houjou.flag" btn-checkbox>北条</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_simadu.flag" btn-checkbox>島津</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_date.flag" btn-checkbox>伊達</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_sanada.flag" btn-checkbox>真田</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_honganji.flag" btn-checkbox>本願</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_mouri.flag" btn-checkbox>毛利</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tyousokabe.flag" btn-checkbox>長宗</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_imagawa.flag" btn-checkbox>今川</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_asakura.flag" btn-checkbox>朝倉</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_azai.flag" btn-checkbox>浅井</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_higasi.flag" btn-checkbox>他東</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_nisi.flag" btn-checkbox>他西</label>
-    </div>
-    </div>
-
+      <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi.flag" btn-checkbox>豊臣</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_bunti.flag"
+                 btn-checkbox>文治</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_budan.flag"
+                 btn-checkbox>武断</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tokugawa.flag" btn-checkbox>徳川</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_oda.flag" btn-checkbox>織田</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_takeda.flag" btn-checkbox>武田</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_uesugi.flag" btn-checkbox>上杉</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_houjou.flag" btn-checkbox>北条</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_simadu.flag" btn-checkbox>島津</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_date.flag" btn-checkbox>伊達</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_sanada.flag" btn-checkbox>真田</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_honganji.flag" btn-checkbox>本願</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_mouri.flag" btn-checkbox>毛利</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tyousokabe.flag"
+                 btn-checkbox>長宗</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_imagawa.flag" btn-checkbox>今川</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_asakura.flag" btn-checkbox>朝倉</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_azai.flag" btn-checkbox>浅井</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_higasi.flag"
+                 btn-checkbox>他東</label>
+          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_nisi.flag" btn-checkbox>他西</label>
+        </div>
+      </div>
     </tab>
+
     <tab heading="兵種">
-
-  <div class="btn-group" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_yari.flag" btn-checkbox>槍</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_yumi.flag" btn-checkbox>弓</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_teppou.flag" btn-checkbox>鉄</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_kiba.flag" btn-checkbox>騎</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_keikiba.flag" btn-checkbox>軽</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_ryukiba.flag" btn-checkbox>竜</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_asigaru.flag" btn-checkbox>足</label>
-  </div>
-
-  <div class="btn-group" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_10.flag" btn-checkbox>1.0</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_15.flag" btn-checkbox>1.5</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_20.flag" btn-checkbox>2.0</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_25.flag" btn-checkbox>2.5</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_30.flag" btn-checkbox>3.0</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_35.flag" btn-checkbox>3.5</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_40.flag" btn-checkbox>4.0</label>
-  </div>
-
-      <div class="btn-group" ng-click="doSearch()">
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_s.flag" btn-checkbox>4.5</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_a.flag" btn-checkbox>4.0</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_b.flag" btn-checkbox>3.5</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_c.flag" btn-checkbox>3.0</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_d.flag" btn-checkbox>2.5</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_e.flag" btn-checkbox>2.0</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_g.flag" btn-checkbox>1.0</label>
+      <div class="btn-group sub-container" ng-click="doSearch()">
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_yari.flag" btn-checkbox>槍</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_yumi.flag" btn-checkbox>弓</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_teppou.flag" btn-checkbox>鉄</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_kiba.flag" btn-checkbox>騎</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_keikiba.flag" btn-checkbox>軽</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_ryukiba.flag" btn-checkbox>竜</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_asigaru.flag" btn-checkbox>足</label>
       </div>
 
-      <div class="btn-group" ng-click="doSearch()">
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_s.flag" btn-checkbox>7</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_a.flag" btn-checkbox>6</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_b.flag" btn-checkbox>5</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_c.flag" btn-checkbox>4</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_d.flag" btn-checkbox>3</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_e.flag" btn-checkbox>2</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_f.flag" btn-checkbox>1</label>
-        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_g.flag" btn-checkbox>0</label>
+      <div class="btn-group sub-container" ng-click="doSearch()">
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_10.flag" btn-checkbox>1.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_15.flag" btn-checkbox>1.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_20.flag" btn-checkbox>2.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_25.flag" btn-checkbox>2.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_30.flag" btn-checkbox>3.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_35.flag" btn-checkbox>3.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_cost.cost_40.flag" btn-checkbox>4.0</label>
       </div>
 
+      <h5><span class="label label-default">武力/コスト</span></h5>
+      <div class="btn-group" ng-click="doSearch()">
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_s.flag" btn-checkbox>4.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_a.flag" btn-checkbox>4.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_b.flag" btn-checkbox>3.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_c.flag" btn-checkbox>3.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_d.flag" btn-checkbox>2.5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_e.flag" btn-checkbox>2.0</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_bu_rank.bu_cost_per_g.flag" btn-checkbox>1.0</label>
+      </div>
 
+      <h5><span class="label label-default">統率/コスト</span></h5>
+      <div class="btn-group" ng-click="doSearch()">
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_s.flag" btn-checkbox>7</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_a.flag" btn-checkbox>6</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_b.flag" btn-checkbox>5</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_c.flag" btn-checkbox>4</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_d.flag" btn-checkbox>3</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_e.flag" btn-checkbox>2</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_f.flag" btn-checkbox>1</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_g.flag" btn-checkbox>0</label>
+      </div>
     </tab>
     <tab heading="特技">
-
-  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_hukuhei.flag" btn-checkbox>伏</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_seiatu.flag" btn-checkbox>制</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_miryoku.flag" btn-checkbox>魅</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_koujou.flag" btn-checkbox>城</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_kiai.flag" btn-checkbox>気</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_bousaku.flag" btn-checkbox>柵</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sinobi.flag" btn-checkbox>忍</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sogeki.flag" btn-checkbox>狙</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_kurumauti.flag" btn-checkbox>車</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_houroku.flag" btn-checkbox>焙</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_tateyari.flag" btn-checkbox>盾</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_toyokuni.flag" btn-checkbox>豊</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_itiryou.flag" btn-checkbox>領</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_mousyuu.flag" btn-checkbox>猛</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_gunbi.flag" btn-checkbox>軍</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sikku.flag" btn-checkbox>疾</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sinsei.flag" btn-checkbox>新</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_karetu.flag" btn-checkbox>列</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_tyuusei.flag" btn-checkbox>忠</label>
-    </div>
-  </div>
+      <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_hukuhei.flag"
+                 btn-checkbox>伏</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_seiatu.flag" btn-checkbox>制</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_miryoku.flag"
+                 btn-checkbox>魅</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_koujou.flag" btn-checkbox>城</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_kiai.flag" btn-checkbox>気</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_bousaku.flag"
+                 btn-checkbox>柵</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sinobi.flag" btn-checkbox>忍</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sogeki.flag" btn-checkbox>狙</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_kurumauti.flag"
+                 btn-checkbox>車</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_houroku.flag"
+                 btn-checkbox>焙</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_tateyari.flag"
+                 btn-checkbox>盾</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_toyokuni.flag"
+                 btn-checkbox>豊</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_itiryou.flag"
+                 btn-checkbox>領</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_mousyuu.flag"
+                 btn-checkbox>猛</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_gunbi.flag" btn-checkbox>軍</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sikku.flag" btn-checkbox>疾</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sinsei.flag" btn-checkbox>新</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_karetu.flag" btn-checkbox>列</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_tyuusei.flag"
+                 btn-checkbox>忠</label>
+        </div>
+      </div>
 
     </tab>
     <tab heading="計略">
 
-  <div class="btn-group" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_02.flag" btn-checkbox>2</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_03.flag" btn-checkbox>3</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_04.flag" btn-checkbox>4</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_05.flag" btn-checkbox>5</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_06.flag" btn-checkbox>6</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_07.flag" btn-checkbox>7</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_08.flag" btn-checkbox>8</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_09.flag" btn-checkbox>9</label>
-    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_10.flag" btn-checkbox>10</label>
-  </div>
-
-  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_kyouka.flag" btn-checkbox>強化</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_zentai_kyouka.flag" btn-checkbox>全体強化</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_kaihuku.flag" btn-checkbox>回復</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_hukkatu.flag" btn-checkbox>復活</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_bougai.flag" btn-checkbox>妨害</label>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_jinkei.flag" btn-checkbox>陣形</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_bougai_jinkei.flag" btn-checkbox>妨害陣形</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_damage.flag" btn-checkbox>ダメージ</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_butou.flag" btn-checkbox>舞踏</label>
-      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_other.flag" btn-checkbox>特殊</label>
-    </div>
-  </div>
-
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="計略テキストから検索" ng-model="bushos.query">
-        <span class="input-group-btn">
-          <button class="btn btn-sm-default" type="button" ng-click="doSearch()">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検 索
-          </button>
-        </span>
+      <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_kyouka.flag"
+                 btn-checkbox>強化</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_zentai_kyouka.flag"
+                 btn-checkbox>全体強化</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_kaihuku.flag"
+                 btn-checkbox>回復</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_hukkatu.flag"
+                 btn-checkbox>復活</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_bougai.flag"
+                 btn-checkbox>妨害</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_jinkei.flag"
+                 btn-checkbox>陣形</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_bougai_jinkei.flag"
+                 btn-checkbox>妨陣</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_damage.flag"
+                 btn-checkbox>ダメージ</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_butou.flag"
+                 btn-checkbox>舞踏</label>
+          <label class="btn btn-sm-narrow" ng-model="bushos.condition_category.category_other.flag"
+                 btn-checkbox>特殊</label>
+        </div>
       </div>
 
+      <h5><span class="label label-default">必要士気</span></h5>
+      <div class="btn-group sub-container" ng-click="doSearch()">
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_02.flag" btn-checkbox>2</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_03.flag" btn-checkbox>3</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_04.flag" btn-checkbox>4</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_05.flag" btn-checkbox>5</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_06.flag" btn-checkbox>6</label>
+        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_07.flag" btn-checkbox>7</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_08.flag" btn-checkbox>8</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_09.flag" btn-checkbox>9</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_10.flag" btn-checkbox>10</label>
+      </div>
     </tab>
-    <tab heading="武家"></tab>
+    <tab heading="他">
+      <div class="input-group sub-container">
+        <input type="text" class="form-control" placeholder="計略テキストから検索" ng-model="bushos.query" ng-change="doSearch()">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="doSearch()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </span>
+      </div>
+    </tab>
+
+    <!--
+    <tab select="" class="pull-right">
+      <tab-heading>
+        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+      </tab-heading>
+    </tab>
+    -->
+
   </tabset>
 
-  <div class="btn-group" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'standard'">標準</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku'">武力</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu'">統率</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'cost'">コス</label>
+  <!--
+  </nav>
+  -->
+
+  <div class="btn-group sub-container" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'standard'">標</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku'">武</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu'">統</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'cost'">C</label>
     <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku_cost'">武/C</label>
     <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu_cost'">統/C</label>
   </div>
 
-  <div class="btn-group" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.order" btn-radio="'asc'">昇</label>
-    <label class="btn btn-sm-default" ng-model="bushos.order" btn-radio="'desc'">降</label>
+  <div class="btn-group sub-container" ng-click="doSearch()">
+    <label class="btn btn-sm-sort" ng-model="bushos.order" btn-radio="'asc'">昇</label>
+    <label class="btn btn-sm-sort" ng-model="bushos.order" btn-radio="'desc'">降</label>
   </div>
 
-  <div class="btn-group">
-    <label class="btn btn-sm-default" ng-model="bushos.condition_display.keiryaku_detail" btn-checkbox>計略説明</label>
+  <div class="btn-group sub-container">
+    <label class="btn btn-sm-default" ng-model="bushos.condition_display.keiryaku_detail" btn-checkbox>詳細</label>
     <label class="btn btn-sm-default" ng-model="bushos.condition_display.busho_retuden" btn-checkbox>列伝</label>
   </div>
 
-  <button class="btn btn-sm-default" type="button" ng-click="doClear()">
-    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> クリア
+  <button class="btn btn-sm-default sub-container" type="button" ng-click="doClear()">
+    Reset
   </button>
 
-  <div class="list-group" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
+  <div class="list-group sub-container" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
        infinite-scroll-distance='1'>
     <a href="" class="list-group-item" ng-repeat="busho in bushos.items">
       <div class="row">
@@ -241,7 +283,6 @@
       <div class="row" ng-show='bushos.busy'>Loading data...</div>
     </a>
   </div>
-
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
   <script>
