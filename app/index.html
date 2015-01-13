@@ -1,119 +1,305 @@
 <!doctype html>
 <html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="sengokusearchApp" ng-controller="textSearchCtrl">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>戦国大戦＠武将カード検索</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
 
-    <!-- Add your site or application content here -->
+<body ng-app="sengokusearchApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <div class="container">
+<!-- Add your site or application content here -->
 
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." ng-model="search_text">
-    <span class="input-group-btn">
-      <button class="btn btn-default" type="button" ng-click="doSearch()">
-        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検 索 </button>
-    </span>
-    </div><!-- /input-group -->
+<div class="container" ng-controller="searchCtrl">
 
-    <div class="list-group">
-      <a href="" class="list-group-item" ng-repeat="busho in bushos">
-        <div class="row">
-          <div class="content-sub">
-            {{ busho._source.buke }}
-          </div>
-          <div class="content-sub">{{ busho._source.card_id }}</div>
-          <div class="content-main"><span class="label label-default"></span></div>
-        </div>
-        <div class="row">
-          <div class="content-sub">
-            <h4>{{ busho._source.heisyu | printSymbol }}</h4>
-          </div>
-          <div class="content-sub">
-            <h4>{{ busho._source.buryoku }} / {{ busho._source.tousotsu }}</h4>
-          </div>
-          <div class="content-main"><h4>{{ busho._source.card_name }}</h4></div>
-        </div>
-        <div class="row">
-          <div class="content-sub">{{ busho._source.cost }}</div>
-          <div class="content-sub">
-            <span ng-repeat="tokugi in busho._source.tokugi">{{ tokugi }}</span>
-          </div>
-          <div class="content-main">{{ busho._source.keiryaku_data.shiki }} {{ busho._source.keiryaku_data.name }}</div>
-        </div>
-        <div class="row">
-          <div class="content-detail">
-            {{ busho._source.keiryaku_data.detail }}
-          </div>
-        </div>
-      </a>
+  <tabset>
+    <tab heading="武家">
+
+  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi.flag" btn-checkbox>豊臣</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_bunti.flag" btn-checkbox>文治</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_budan.flag" btn-checkbox>武断</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tokugawa.flag" btn-checkbox>徳川</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_oda.flag" btn-checkbox>織田</label>
+    </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_takeda.flag" btn-checkbox>武田</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_uesugi.flag" btn-checkbox>上杉</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_houjou.flag" btn-checkbox>北条</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_simadu.flag" btn-checkbox>島津</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_date.flag" btn-checkbox>伊達</label>
+    </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_sanada.flag" btn-checkbox>真田</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_honganji.flag" btn-checkbox>本願</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_mouri.flag" btn-checkbox>毛利</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tyousokabe.flag" btn-checkbox>長宗</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_imagawa.flag" btn-checkbox>今川</label>
+    </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_asakura.flag" btn-checkbox>朝倉</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_azai.flag" btn-checkbox>浅井</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_higasi.flag" btn-checkbox>他東</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_take_nisi.flag" btn-checkbox>他西</label>
+    </div>
     </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </tab>
+    <tab heading="兵種">
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+  <div class="btn-group" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_yari.flag" btn-checkbox>槍</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_yumi.flag" btn-checkbox>弓</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_teppou.flag" btn-checkbox>鉄</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_kiba.flag" btn-checkbox>騎</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_keikiba.flag" btn-checkbox>軽</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_ryukiba.flag" btn-checkbox>竜</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_heisyu.heisyu_asigaru.flag" btn-checkbox>足</label>
+  </div>
 
-    <!-- build:js(.) scripts/oldieshim.js -->
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <![endif]-->
-    <!-- endbuild -->
+  <div class="btn-group" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_10.flag" btn-checkbox>1.0</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_15.flag" btn-checkbox>1.5</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_20.flag" btn-checkbox>2.0</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_25.flag" btn-checkbox>2.5</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_30.flag" btn-checkbox>3.0</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_35.flag" btn-checkbox>3.5</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_cost.cost_40.flag" btn-checkbox>4.0</label>
+  </div>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+      <div class="btn-group" ng-click="doSearch()">
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_s.flag" btn-checkbox>4.5</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_a.flag" btn-checkbox>4.0</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_b.flag" btn-checkbox>3.5</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_c.flag" btn-checkbox>3.0</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_d.flag" btn-checkbox>2.5</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_e.flag" btn-checkbox>2.0</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_bu_rank.bu_cost_per_g.flag" btn-checkbox>1.0</label>
+      </div>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+      <div class="btn-group" ng-click="doSearch()">
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_s.flag" btn-checkbox>7</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_a.flag" btn-checkbox>6</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_b.flag" btn-checkbox>5</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_c.flag" btn-checkbox>4</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_d.flag" btn-checkbox>3</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_e.flag" btn-checkbox>2</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_f.flag" btn-checkbox>1</label>
+        <label class="btn btn-sm-default" ng-model="bushos.condition_tou_rank.tou_cost_per_g.flag" btn-checkbox>0</label>
+      </div>
+
+
+    </tab>
+    <tab heading="特技">
+
+  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_hukuhei.flag" btn-checkbox>伏</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_seiatu.flag" btn-checkbox>制</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_miryoku.flag" btn-checkbox>魅</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_koujou.flag" btn-checkbox>城</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_kiai.flag" btn-checkbox>気</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_bousaku.flag" btn-checkbox>柵</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sinobi.flag" btn-checkbox>忍</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sogeki.flag" btn-checkbox>狙</label>
     </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_kurumauti.flag" btn-checkbox>車</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_houroku.flag" btn-checkbox>焙</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_tateyari.flag" btn-checkbox>盾</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_toyokuni.flag" btn-checkbox>豊</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_itiryou.flag" btn-checkbox>領</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_mousyuu.flag" btn-checkbox>猛</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_gunbi.flag" btn-checkbox>軍</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sikku.flag" btn-checkbox>疾</label>
+    </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_sinsei.flag" btn-checkbox>新</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_karetu.flag" btn-checkbox>列</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_tokugi.tokugi_tyuusei.flag" btn-checkbox>忠</label>
+    </div>
+  </div>
+
+    </tab>
+    <tab heading="計略">
+
+  <div class="btn-group" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_02.flag" btn-checkbox>2</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_03.flag" btn-checkbox>3</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_04.flag" btn-checkbox>4</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_05.flag" btn-checkbox>5</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_06.flag" btn-checkbox>6</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_07.flag" btn-checkbox>7</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_08.flag" btn-checkbox>8</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_09.flag" btn-checkbox>9</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_shiki.shiki_10.flag" btn-checkbox>10</label>
+  </div>
+
+  <div class="btn-toolbar" role="toolbar" aria-label="..." ng-click="doSearch()">
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_kyouka.flag" btn-checkbox>強化</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_zentai_kyouka.flag" btn-checkbox>全体強化</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_kaihuku.flag" btn-checkbox>回復</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_hukkatu.flag" btn-checkbox>復活</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_bougai.flag" btn-checkbox>妨害</label>
+    </div>
+    <div class="btn-group" role="group" aria-label="...">
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_jinkei.flag" btn-checkbox>陣形</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_bougai_jinkei.flag" btn-checkbox>妨害陣形</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_damage.flag" btn-checkbox>ダメージ</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_butou.flag" btn-checkbox>舞踏</label>
+      <label class="btn btn-sm-default" ng-model="bushos.condition_category.category_other.flag" btn-checkbox>特殊</label>
+    </div>
+  </div>
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="計略テキストから検索" ng-model="bushos.query">
+        <span class="input-group-btn">
+          <button class="btn btn-sm-default" type="button" ng-click="doSearch()">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検 索
+          </button>
+        </span>
+      </div>
+
+    </tab>
+    <tab heading="武家"></tab>
+  </tabset>
+
+  <div class="btn-group" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'standard'">標準</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku'">武力</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu'">統率</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'cost'">コス</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku_cost'">武/C</label>
+    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu_cost'">統/C</label>
+  </div>
+
+  <div class="btn-group" ng-click="doSearch()">
+    <label class="btn btn-sm-default" ng-model="bushos.order" btn-radio="'asc'">昇</label>
+    <label class="btn btn-sm-default" ng-model="bushos.order" btn-radio="'desc'">降</label>
+  </div>
+
+  <div class="btn-group">
+    <label class="btn btn-sm-default" ng-model="bushos.condition_display.keiryaku_detail" btn-checkbox>計略説明</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_display.busho_retuden" btn-checkbox>列伝</label>
+  </div>
+
+  <button class="btn btn-sm-default" type="button" ng-click="doClear()">
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> クリア
+  </button>
+
+  <div class="list-group" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
+       infinite-scroll-distance='1'>
+    <a href="" class="list-group-item" ng-repeat="busho in bushos.items">
+      <div class="row">
+        <div class="content-sub">
+          {{ busho.buke }}
+        </div>
+        <div class="content-sub">{{ busho.card_id }}</div>
+        <div class="content-main"><span class="label label-default"></span></div>
+      </div>
+      <div class="row">
+        <div class="content-sub">
+          <h4>{{ busho.heisyu | printSymbol }}</h4>
+        </div>
+        <div class="content-sub">
+          <h4>{{ busho.buryoku }} / {{ busho.tousotsu }}</h4>
+        </div>
+        <div class="content-main"><h4>{{ busho.card_name }}</h4></div>
+      </div>
+      <div class="row">
+        <div class="content-sub">{{ busho.cost }}</div>
+        <div class="content-sub">
+          <span ng-repeat="tokugi in busho.tokugi">{{ tokugi }}</span>
+        </div>
+        <div class="content-main">{{ busho.keiryaku_data.shiki }} {{ busho.keiryaku_data.name }}</div>
+      </div>
+      <div class="row" ng-show="bushos.condition_display.keiryaku_detail">
+        <div class="content-detail">
+          {{ busho.keiryaku_data.detail }}
+        </div>
+      </div>
+      <div class="row" ng-show="bushos.condition_display.busho_retuden">
+        <div class="content-detail">
+          {{ busho.retuden }}
+        </div>
+      </div>
+      <div class="row" ng-show='bushos.busy'>Loading data...</div>
+    </a>
+  </div>
+
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-57872662-2');
+    ga('send', 'pageview');
+  </script>
+
+  <!-- build:js(.) scripts/oldieshim.js -->
+  <!--[if lt IE 9]>
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <script src="bower_components/json3/lib/json3.js"></script>
+  <![endif]-->
+  <!-- endbuild -->
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <!-- endbuild -->
+</div>
 </body>
 </html>

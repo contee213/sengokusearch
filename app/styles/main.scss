@@ -91,6 +91,13 @@ body {
   }
 }
 
+.nav li a {
+  padding: 4px 10px;
+}
+
+.tooltip {
+  @include make-xs-column(1, 10px);
+}
 .content-sub {
   @include make-xs-column(3, 10px);
 }
@@ -100,4 +107,62 @@ body {
 .content-detail {
   @include make-lg-column(12, 10px);
   margin-top: 5px;
+}
+
+.btn-sm-default {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  &:not(.active) {
+    background-color: $btn-default-bg;
+  }
+  padding: 6px 14px 6px 14px;
+}
+
+// buke color
+.btn-oda {
+  @include button-variant(#fff, #1A63E7, #ccc);
+  &:not(.active) {
+    background-color: #1A63E7;
+  }
+}
+.btn-takeda {
+  @include button-variant(#fff, #C31419, #ccc);
+}
+.btn-uesugi {
+  @include button-variant(#fff, #A9A9A9, #ccc);
+}
+.btn-imagawa {
+  @include button-variant(#fff, #951CB7, #ccc);
+}
+.btn-azai-asakura {
+  @include button-variant(#fff, #E17F9D, #ccc);
+}
+.btn-honganji {
+  @include button-variant(#fff, #708A3C, #ccc);
+}
+.btn-houjou {
+  @include button-variant(#fff, #F0C71D, #ccc);
+}
+.btn-mouri {
+  @include button-variant(#fff, #00C993, #ccc);
+}
+.btn-simadu {
+  @include button-variant(#fff, #1BA5C8, #ccc);
+}
+.btn-toyotomi {
+  @include button-variant(#fff, #FF9705, #ccc);
+}
+.btn-date {
+  @include button-variant(#fff, #1327BE, #ccc);
+}
+.btn-tokugawa {
+  @include button-variant(#fff, #5CB84C, #ccc);
+}
+.btn-tyousokabe {
+  @include button-variant(#fff, #928FFA, #ccc);
+}
+.btn-sanada {
+  @include button-variant(#fff, #4F061E, #ccc);
+}
+.btn-take {
+  @include button-variant(#fff, #7F7A26, #ccc);
 }
