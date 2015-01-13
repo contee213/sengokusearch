@@ -236,6 +236,35 @@ myApp.factory('Busho', ['$http', function($http) {
     this.end = false;
   }
 
+  Busho.prototype.getBukeStyle = function(buke) {
+
+    var buke_style = {
+      buke_toyotomi: {style: {"background-color":"#FF9705"}, text: "豊臣家"},
+      buke_tokugawa: {style: {"background-color":"#5CB84C"}, text: "徳川家"},
+      buke_oda: {style: {"background-color":"#1A63E7"}, text: "織田家"},
+      buke_takeda: {style: {"background-color":"#C31419"}, text: "武田家"},
+      buke_uesugi: {style: {"background-color":"#A9A9A9"}, text: "上杉家"},
+      buke_houjou: {style: {"background-color":"#F0C71D"}, text: "北条家"},
+      buke_simadu: {style: {"background-color":"#1BA5C8"}, text: "島津家"},
+      buke_date: {style: {"background-color":"#1327BE"}, text: "伊達家"},
+      buke_mouri: {style: {"background-color":"#00C993"}, text: "毛利家"},
+      buke_sanada: {style: {"background-color":"#4F061E"}, text: "真田家"},
+      buke_honganji: {style: {"background-color":"#708A3C"}, text: "本願寺"},
+      buke_tyousokabe: {style: {"background-color":"#928FFA"}, text: "長宗我部家"},
+      buke_imagawa: {style: {"background-color":"#951CB7"}, text: "今川家"},
+      buke_asakura: {style: {"background-color":"#E17F9D"}, text: "朝倉家"},
+      buke_azai: {style: {"background-color":"#E17F9D"}, text: "浅井家"},
+      buke_take_higasi: {style: {"background-color":"#7F7A26"}, text: "他家･東"},
+      buke_take_nisi: {style: {"background-color":"#7F7A26"}, text: "他家･西"}
+    };
+
+    for (var key in buke_style) {
+      if (buke == buke_style[key].text) {
+        return buke_style[key].style;
+      }
+    }
+  }
+
   Busho.prototype.toggleOrder = function() {
 
     this.sort_define = {

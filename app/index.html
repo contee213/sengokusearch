@@ -246,41 +246,41 @@
 
   <div class="list-group sub-container" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
        infinite-scroll-distance='1'>
-    <a href="" class="list-group-item" ng-repeat="busho in bushos.items">
-      <div class="row">
-        <div class="content-sub">
-          {{ busho.buke }}
+    <a href="" class="list-group-item busho-main" ng-repeat="busho in bushos.items">
+        <div class="row busho-header" ng-style="bushos.getBukeStyle(busho.buke)">
+          <div class="content-sub">
+            {{ busho.buke }}
+          </div>
+          <div class="content-sub">{{ busho.card_id }}</div>
+          <div class="content-main"><span class="label label-default"></span></div>
         </div>
-        <div class="content-sub">{{ busho.card_id }}</div>
-        <div class="content-main"><span class="label label-default"></span></div>
-      </div>
-      <div class="row">
-        <div class="content-sub">
-          <h4>{{ busho.heisyu | printSymbol }}</h4>
+        <div class="row">
+          <div class="content-sub">
+            <h4>{{ busho.heisyu | printSymbol }}</h4>
+          </div>
+          <div class="content-sub">
+            <h4>{{ busho.buryoku }} / {{ busho.tousotsu }}</h4>
+          </div>
+          <div class="content-main"><h4>{{ busho.card_name }}</h4></div>
         </div>
-        <div class="content-sub">
-          <h4>{{ busho.buryoku }} / {{ busho.tousotsu }}</h4>
+        <div class="row">
+          <div class="content-sub">{{ busho.cost }}</div>
+          <div class="content-sub">
+            <span ng-repeat="tokugi in busho.tokugi">{{ tokugi }}</span>
+          </div>
+          <div class="content-main">{{ busho.keiryaku_data.shiki }} {{ busho.keiryaku_data.name }}</div>
         </div>
-        <div class="content-main"><h4>{{ busho.card_name }}</h4></div>
-      </div>
-      <div class="row">
-        <div class="content-sub">{{ busho.cost }}</div>
-        <div class="content-sub">
-          <span ng-repeat="tokugi in busho.tokugi">{{ tokugi }}</span>
+        <div class="row" ng-show="bushos.condition_display.keiryaku_detail">
+          <div class="content-detail">
+            {{ busho.keiryaku_data.detail }}
+          </div>
         </div>
-        <div class="content-main">{{ busho.keiryaku_data.shiki }} {{ busho.keiryaku_data.name }}</div>
-      </div>
-      <div class="row" ng-show="bushos.condition_display.keiryaku_detail">
-        <div class="content-detail">
-          {{ busho.keiryaku_data.detail }}
+        <div class="row" ng-show="bushos.condition_display.busho_retuden">
+          <div class="content-detail">
+            {{ busho.retuden }}
+          </div>
         </div>
-      </div>
-      <div class="row" ng-show="bushos.condition_display.busho_retuden">
-        <div class="content-detail">
-          {{ busho.retuden }}
-        </div>
-      </div>
-      <div class="row" ng-show='bushos.busy'>Loading data...</div>
+        <div class="row" ng-show='bushos.busy'>Loading data...</div>
     </a>
   </div>
 
