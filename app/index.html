@@ -25,6 +25,34 @@
 
 <div class="container" ng-controller="searchCtrl">
 
+
+
+  <div class="list-group sub-container" ng-show="deck.cards.length">
+    <div class="panel panel-default">
+      <div class="panel-body-small">
+        コスト{{ deck.sou_cost }} / 武力 {{ deck.sou_buryoku }} 統率 {{ deck.sou_tousotsu }} / 最大士気 {{ deck.max_shiki }}
+      </div>
+    </div>
+    <a href="" class="list-group-item busho-header" ng-repeat="card in deck.cards" ng-style="bushos.getBukeStyle(card.buke)" ng-click="addCard(card)">
+      <div class="row busho-header">
+        <div class="content-sub">{{ card.heisyu | printSymbol }} {{ card.card_id }}</div>
+        <div class="content-main">{{ card.card_name }}</div>
+        <div class="content-sub">{{ card.buryoku }} / {{ card.tousotsu }}</div>
+      </div>
+      <div class="row busho-header">
+        <div class="content-sub">{{ card.cost }}</div>
+        <div class="content-sub">
+          <span ng-repeat="tokugi in card.tokugi">{{ tokugi }}</span>
+        </div>
+        <div class="content-main">{{ card.keiryaku_data.shiki }} {{ card.keiryaku_data.name }}</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="alert alert-warning" role="alert" ng-show="errors.length">
+    <h5 ng-repeat="error in errors">{{ error }}</h5>
+  </div>
+
   <div class="navbar-fixed-bottom btn-group navbar-right" role="group" aria-label="..." ng-controller="ScrollController">
     <button type="button" class="btn btn-default" ng-click="gotoBottom()">
       top
@@ -149,7 +177,7 @@
           <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_gunbi.flag" btn-checkbox>軍</label>
           <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sikku.flag" btn-checkbox>疾</label>
           <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_sinsei.flag" btn-checkbox>新</label>
-          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_karetu.flag" btn-checkbox>列</label>
+          <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_karetu.flag" btn-checkbox>烈</label>
           <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_tyuusei.flag"
                  btn-checkbox>忠</label>
         </div>
@@ -236,7 +264,7 @@
   </div>
 
   <div class="btn-group sub-container">
-    <label class="btn btn-sm-default" ng-model="bushos.condition_display.keiryaku_detail" btn-checkbox>詳細</label>
+    <label class="btn btn-sm-default" ng-model="bushos.condition_display.keiryaku_detail" btn-checkbox>計略</label>
     <label class="btn btn-sm-default" ng-model="bushos.condition_display.busho_retuden" btn-checkbox>列伝</label>
   </div>
 
@@ -246,13 +274,14 @@
 
   <div class="list-group sub-container" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
        infinite-scroll-distance='1'>
-    <a href="" class="list-group-item busho-main" ng-repeat="busho in bushos.items">
+    <a href="" class="list-group-item busho-main" ng-repeat="busho in bushos.items" ng-click="addCard(busho)">
         <div class="row busho-header" ng-style="bushos.getBukeStyle(busho.buke)">
           <div class="content-sub">
             {{ busho.buke }}
           </div>
           <div class="content-sub">{{ busho.card_id }}</div>
-          <div class="content-main"><span class="label label-default"></span></div>
+          <div class="content-sub">ver.{{ busho.game_version / 1000 }}</div>
+          <div class="content-sub"><span class="label label-default" ng-show="busho.inDeck">デッキ</span></div>
         </div>
         <div class="row">
           <div class="content-sub">

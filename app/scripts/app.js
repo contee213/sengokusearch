@@ -9,8 +9,8 @@
  * Main module of the application.
  */
 
-var endpoint = "http://1059.contee.net:9200/sengoku/busho/_search";
-// var endpoint = "http://127.0.0.1:9200/sengoku/busho/_search";
+// var endpoint = "http://1059.contee.net:9200/sengoku/busho/_search";
+var endpoint = "http://127.0.0.1:9200/sengoku/busho/_search";
 
 var myApp = angular
   .module('sengokusearchApp', [
@@ -38,9 +38,10 @@ var myApp = angular
       });
   });
 
-myApp.controller('searchCtrl', function($scope, Busho) {
+myApp.controller('searchCtrl', function($scope, Busho, Deck) {
 
   $scope.bushos = new Busho();
+  $scope.deck = new Deck();
 
   $scope.doSearch = function() {
     $scope.bushos.clear();
@@ -50,6 +51,21 @@ myApp.controller('searchCtrl', function($scope, Busho) {
   $scope.doClear = function() {
     $scope.bushos = new Busho();
     $scope.bushos.nextPage();
+  }
+
+  $scope.addCard = function(busho) {
+
+    if (busho.inDeck) {
+      busho.inDeck = false;
+      $scope.deck.cards = $scope.deck.cards.filter(function(v) {
+        return (v !== busho);
+      });
+    } else {
+      busho.inDeck = true;
+      $scope.deck.cards.push(busho);
+    }
+    $scope.deck.calc();
+    $scope.errors = $scope.deck.check();
   }
 
 });
@@ -66,6 +82,74 @@ myApp.controller('ScrollController', ['$scope', '$location', '$anchorScroll',
       $anchorScroll();
     };
   }]);
+
+myApp.factory('Deck', [function(){
+
+  var Deck = function() {
+    this.cards = [];
+    this.sou_buryoku = 0;
+    this.sou_cost = 0;
+    this.sou_tousotsu = 0;
+    this.max_shiki = 0;
+  }
+
+  Deck.prototype.calc = function() {
+    this.sou_cost = this.sum('cost');
+    this.sou_buryoku = this.sum('buryoku');
+    this.sou_tousotsu= this.sum('tousotsu');
+    this.max_shiki = this.maxShiki();
+  }
+
+  Deck.prototype.sum = function(key) {
+    var sum = 0;
+    this.cards.forEach(function(e) {
+      sum += Number(e[key])
+    })
+    return sum
+  }
+
+  Deck.prototype.maxShiki = function() {
+    // 最大士気計算
+    var buke_set = new Set();
+    this.cards.forEach(function (e) {
+      buke_set.add(e.buke)
+    })
+    var shiki = 6;
+    if (buke_set.size == 1) {
+      shiki += 6
+    } else if (buke_set.size == 2) {
+      shiki += 3
+    } else if (buke_set.size == 3) {
+      shiki += 1
+    }
+    if (buke_set.has('他家･東') && buke_set.has('他家･西')) {
+      shiki += 1;
+    }
+
+    return shiki
+  }
+
+  Deck.prototype.check = function() {
+    var unique_name_set = new Set();
+    var error = new Set();
+    this.cards.forEach(function(e) {
+      if (unique_name_set.has(e.sengoku_name)) {
+        var msg = '武将が重複しています -> ' + e.sengoku_name;
+        error.add(msg);
+      } else {
+        unique_name_set.add(e.sengoku_name);
+      }
+    })
+    var arError = [];
+    error.forEach(function(v) {
+      arError.push(v);
+    })
+    return arError;
+  }
+
+  return Deck;
+
+}])
 
 myApp.factory('Busho', ['$http', function($http) {
 

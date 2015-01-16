@@ -125,17 +125,35 @@ h5 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.panel {
+  margin-bottom: 10px;
+}
+
+.panel-body-small {
+  padding: 5px;
+}
+
 .tooltip {
   @include make-xs-column(1, 10px);
+}
+.content-mini {
+  @include make-xs-column(2, 10px);
 }
 .content-sub {
   @include make-xs-column(3, 10px);
 }
+.content-four {
+  @include make-xs-column(4, 10px);
+}
+.content-five {
+  @include make-xs-column(5, 10px);
+}
 .content-main {
-  @include make-lg-column(6, 10px);
+  @include make-xs-column(6, 10px);
 }
 .content-detail {
-  @include make-lg-column(12, 10px);
+  @include make-xs-column(12, 10px);
   margin-top: 5px;
 }
 
