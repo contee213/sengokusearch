@@ -10,10 +10,15 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   padding: 0.2em 0;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
   padding-bottom: 50px;
+  font-size: small;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -91,6 +96,11 @@ body {
   }
 }
 
+.container {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .busho-header  {
   color: #fff;
 }
@@ -162,7 +172,7 @@ h5 {
   &:not(.active) {
     background-color: $btn-default-bg;
   }
-  padding: 6px 14px 6px 14px;
+  padding: 6px 17px 6px 17px;
 }
 
 .btn-sm-single {
@@ -170,7 +180,7 @@ h5 {
   &:not(.active) {
     background-color: $btn-default-bg;
   }
-  padding: 6px 12px 6px 12px;
+  padding: 6px 15px 6px 15px;
 }
 
 .btn-sm-narrow {
@@ -178,7 +188,7 @@ h5 {
   &:not(.active) {
     background-color: $btn-default-bg;
   }
-  padding: 6px 10px 6px 10px;
+  padding: 6px 12px 6px 12px;
 }
 
 .btn-sm-sort {
@@ -186,7 +196,7 @@ h5 {
   &:not(.active) {
     background-color: $btn-default-bg;
   }
-  padding: 6px 14px 6px 14px;
+  padding: 6px 17px 6px 17px;
 }
 
 // buke color

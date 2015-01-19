@@ -44,17 +44,20 @@ myApp.controller('searchCtrl', function($scope, Busho, Deck) {
   $scope.deck = new Deck();
 
   $scope.doSearch = function() {
+    $scope.errors = [];
     $scope.bushos.clear();
-    $scope.bushos.nextPage();
+    $scope.bushos.nextPage($scope.errors);
   }
 
   $scope.doClear = function() {
+    $scope.errors = [];
     $scope.bushos = new Busho();
-    $scope.bushos.nextPage();
+    $scope.bushos.nextPage($scope.errors);
   }
 
   $scope.addCard = function(busho) {
 
+    $scope.errors = [];
     if (busho.inDeck) {
       busho.inDeck = false;
       $scope.deck.cards = $scope.deck.cards.filter(function(v) {
@@ -65,7 +68,7 @@ myApp.controller('searchCtrl', function($scope, Busho, Deck) {
       $scope.deck.cards.push(busho);
     }
     $scope.deck.calc();
-    $scope.errors = $scope.deck.check();
+    $scope.deck.check($scope.errors);
   }
 
 });
@@ -129,7 +132,7 @@ myApp.factory('Deck', [function(){
     return shiki
   }
 
-  Deck.prototype.check = function() {
+  Deck.prototype.check = function(errors) {
     var unique_name_set = new Set();
     var error = new Set();
     this.cards.forEach(function(e) {
@@ -140,11 +143,9 @@ myApp.factory('Deck', [function(){
         unique_name_set.add(e.sengoku_name);
       }
     })
-    var arError = [];
     error.forEach(function(v) {
-      arError.push(v);
+      errors.push(v);
     })
-    return arError;
   }
 
   return Deck;
@@ -284,6 +285,16 @@ myApp.factory('Busho', ['$http', function($http) {
       tou_cost_per_s: {flag: false,
         text: "min < doc.tousotsu.value/doc.cost.value",
         params: {min: 7.0}}
+    };
+
+    this.condition_rarity = {
+      rarity_c: {flag: false, rarity: "C"},
+      rarity_uc: {flag: false, rarity: "UC"},
+      rarity_r: {flag: false, rarity: "R"},
+      rarity_sr: {flag: false, rarity: "SR"},
+      rarity_ss: {flag: false, rarity: "SS"},
+      rarity_ex: {flag: false, text: "EX"},
+      rarity_utage: {flag: false, text: "宴"}
     };
 
     this.condition_shiki = {
@@ -599,6 +610,37 @@ myApp.factory('Busho', ['$http', function($http) {
       })
     }
 
+    // レアリティ
+    var rarity = [];
+    var rarity_filters = [];
+    for (var key in this.condition_rarity) {
+      var cond = this.condition_rarity[key];
+      if (cond.flag) {
+        if (cond.rarity) {
+          rarity.push(cond.rarity)
+        }
+        if (cond.text) {
+          rarity_filters.push({
+            prefix: {
+              card_id: cond.text
+            }
+          })
+        }
+      }
+    }
+    if (rarity.length > 0) {
+      rarity_filters.push({
+        terms: {
+          rarity: rarity
+        }
+      })
+    }
+    if (rarity_filters.length > 0) {
+      data.query.filtered.filter.and.filters.push({
+        or: rarity_filters
+      })
+    }
+
     // 計略士気
     for (var key in this.condition_shiki) {
       var cond = this.condition_shiki[key]
@@ -634,7 +676,7 @@ myApp.factory('Busho', ['$http', function($http) {
     return data
   }
 
-  Busho.prototype.nextPage = function() {
+  Busho.prototype.nextPage = function(errors) {
 
     // console.log(this.from);
 
@@ -655,6 +697,10 @@ myApp.factory('Busho', ['$http', function($http) {
       if (!items || items.length == 0) {
         this.busy = false;
         this.end = true;
+        if (this.items.length == 0) {
+          var msg = '該当するカードがありません';
+          errors.push(msg);
+        }
         return;
       }
 

@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>戦国大戦＠武将カード検索</title>
-  <meta name="description" content="">
+  <meta name="description" content="戦国大戦(c)SEGAの武将カードを検索することができます。簡易なデッキシミュレータとしてもご利用いただけます。武家・兵種・コスト等による条件検索はもちろん、
+  計略テキストから指定キーワードを条件に検索することもできるので、移動速度が上昇する計略を持つ武将を選択したい、といった絞り込みも可能です。">
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
@@ -25,9 +26,7 @@
 
 <div class="container" ng-controller="searchCtrl">
 
-
-
-  <div class="list-group sub-container" ng-show="deck.cards.length">
+  <div class="list-group sub-container" ng-show="deck.cards.length" ng-cloak>
     <div class="panel panel-default">
       <div class="panel-body-small">
         コスト{{ deck.sou_cost }} / 武力 {{ deck.sou_buryoku }} 統率 {{ deck.sou_tousotsu }} / 最大士気 {{ deck.max_shiki }}
@@ -49,7 +48,7 @@
     </a>
   </div>
 
-  <div class="alert alert-warning" role="alert" ng-show="errors.length">
+  <div class="alert alert-warning" role="alert" ng-show="errors.length" ng-cloak>
     <h5 ng-repeat="error in errors">{{ error }}</h5>
   </div>
 
@@ -64,16 +63,16 @@
   -->
 
   <tabset>
-    <tab heading="武家">
+    <tab heading="武 家">
       <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
-        <div class="btn-group" role="group" aria-label="...">
-          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi.flag" btn-checkbox>豊臣</label>
-          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_bunti.flag"
+        <div class="btn-group row" role="group" aria-label="...">
+          <label class="btn btn-sm-default content-sub"ng-model="bushos.condition_buke.buke_toyotomi.flag" btn-checkbox>豊臣</label>
+          <label class="btn btn-sm-default content-sub" ng-model="bushos.condition_buke.buke_toyotomi_bunti.flag"
                  btn-checkbox>文治</label>
-          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_toyotomi_budan.flag"
+          <label class="btn btn-sm-default content-sub" ng-model="bushos.condition_buke.buke_toyotomi_budan.flag"
                  btn-checkbox>武断</label>
-          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_tokugawa.flag" btn-checkbox>徳川</label>
-          <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_oda.flag" btn-checkbox>織田</label>
+          <label class="btn btn-sm-default content-sub" ng-model="bushos.condition_buke.buke_tokugawa.flag" btn-checkbox>徳川</label>
+          <label class="btn btn-sm-default content-sub" ng-model="bushos.condition_buke.buke_oda.flag" btn-checkbox>織田</label>
         </div>
         <div class="btn-group" role="group" aria-label="...">
           <label class="btn btn-sm-default" ng-model="bushos.condition_buke.buke_takeda.flag" btn-checkbox>武田</label>
@@ -100,7 +99,7 @@
       </div>
     </tab>
 
-    <tab heading="兵種">
+    <tab heading="兵  種">
       <div class="btn-group sub-container" ng-click="doSearch()">
         <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_yari.flag" btn-checkbox>槍</label>
         <label class="btn btn-sm-single" ng-model="bushos.condition_heisyu.heisyu_yumi.flag" btn-checkbox>弓</label>
@@ -144,7 +143,7 @@
         <label class="btn btn-sm-single" ng-model="bushos.condition_tou_rank.tou_cost_per_g.flag" btn-checkbox>0</label>
       </div>
     </tab>
-    <tab heading="特技">
+    <tab heading="特 技">
       <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
         <div class="btn-group" role="group" aria-label="...">
           <label class="btn btn-sm-single" ng-model="bushos.condition_tokugi.tokugi_hukuhei.flag"
@@ -184,7 +183,7 @@
       </div>
 
     </tab>
-    <tab heading="計略">
+    <tab heading="計 略">
 
       <div class="btn-toolbar sub-container" role="toolbar" aria-label="..." ng-click="doSearch()">
         <div class="btn-group" role="group" aria-label="...">
@@ -216,22 +215,34 @@
       <h5><span class="label label-default">必要士気</span></h5>
       <div class="btn-group sub-container" ng-click="doSearch()">
         <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_02.flag" btn-checkbox>2</label>
-        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_03.flag" btn-checkbox>3</label>
-        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_04.flag" btn-checkbox>4</label>
-        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_05.flag" btn-checkbox>5</label>
-        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_06.flag" btn-checkbox>6</label>
-        <label class="btn btn-sm-single" ng-model="bushos.condition_shiki.shiki_07.flag" btn-checkbox>7</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_03.flag" btn-checkbox>3</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_04.flag" btn-checkbox>4</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_05.flag" btn-checkbox>5</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_06.flag" btn-checkbox>6</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_07.flag" btn-checkbox>7</label>
         <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_08.flag" btn-checkbox>8</label>
         <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_09.flag" btn-checkbox>9</label>
         <label class="btn btn-sm-narrow" ng-model="bushos.condition_shiki.shiki_10.flag" btn-checkbox>10</label>
       </div>
-    </tab>
-    <tab heading="他">
+
+      <h5><span class="label label-default">計略詳細</span></h5>
       <div class="input-group sub-container">
         <input type="text" class="form-control" placeholder="計略テキストから検索" ng-model="bushos.query" ng-change="doSearch()">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="doSearch()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </span>
+      </div>
+    </tab>
+    <tab heading="その他">
+      <h5><span class="label label-default">レアリティ</span></h5>
+      <div class="btn-group sub-container" ng-click="doSearch()">
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_c.flag" btn-checkbox>C</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_uc.flag" btn-checkbox>UC</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_r.flag" btn-checkbox>R</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_sr.flag" btn-checkbox>SR</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_ss.flag" btn-checkbox>SS</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_ex.flag" btn-checkbox>EX</label>
+        <label class="btn btn-sm-narrow" ng-model="bushos.condition_rarity.rarity_utage.flag" btn-checkbox>宴</label>
       </div>
     </tab>
 
@@ -250,17 +261,17 @@
   -->
 
   <div class="btn-group sub-container" ng-click="doSearch()">
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'standard'">標</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku'">武</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu'">統</label>
-    <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'cost'">C</label>
+    <label class="btn btn-sm-single" ng-model="bushos.sort" btn-radio="'standard'">標</label>
+    <label class="btn btn-sm-single" ng-model="bushos.sort" btn-radio="'buryoku'">武</label>
+    <label class="btn btn-sm-single" ng-model="bushos.sort" btn-radio="'tousotsu'">統</label>
+    <label class="btn btn-sm-single" ng-model="bushos.sort" btn-radio="'cost'">C</label>
     <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'buryoku_cost'">武/C</label>
     <label class="btn btn-sm-default" ng-model="bushos.sort" btn-radio="'tousotsu_cost'">統/C</label>
   </div>
 
   <div class="btn-group sub-container" ng-click="doSearch()">
-    <label class="btn btn-sm-sort" ng-model="bushos.order" btn-radio="'asc'">昇</label>
-    <label class="btn btn-sm-sort" ng-model="bushos.order" btn-radio="'desc'">降</label>
+    <label class="btn btn-sm-single" ng-model="bushos.order" btn-radio="'asc'">昇</label>
+    <label class="btn btn-sm-single" ng-model="bushos.order" btn-radio="'desc'">降</label>
   </div>
 
   <div class="btn-group sub-container">
@@ -269,12 +280,12 @@
   </div>
 
   <button class="btn btn-sm-default sub-container" type="button" ng-click="doClear()">
-    Reset
+    クリア
   </button>
 
   <div class="list-group sub-container" infinite-scroll='bushos.nextPage()' infinite-scroll-disabled='bushos.busy'
-       infinite-scroll-distance='1'>
-    <a href="" class="list-group-item busho-main" ng-repeat="busho in bushos.items" ng-click="addCard(busho)">
+       infinite-scroll-distance='1' ng-cloak>
+    <a class="list-group-item busho-main" ng-repeat="busho in bushos.items" ng-click="addCard(busho)">
         <div class="row busho-header" ng-style="bushos.getBukeStyle(busho.buke)">
           <div class="content-sub">
             {{ busho.buke }}
@@ -301,16 +312,23 @@
         </div>
         <div class="row" ng-show="bushos.condition_display.keiryaku_detail">
           <div class="content-detail">
-            {{ busho.keiryaku_data.detail }}
+            <small>{{ busho.keiryaku_data.detail }}</small>
           </div>
         </div>
         <div class="row" ng-show="bushos.condition_display.busho_retuden">
           <div class="content-detail">
-            {{ busho.retuden }}
+            <small>{{ busho.retuden }}</small>
           </div>
         </div>
-        <div class="row" ng-show='bushos.busy'>Loading data...</div>
+        <div class="row" ng-show='bushos.busy'>Loading ...</div>
     </a>
+  </div>
+
+  <div style="color:#666">
+    <small>
+      本サイトで使用している戦国大戦のカードに関する画像・テキスト等の著作権はすべて(C)SEGA又は正当な権限を有する第三者に帰属します。
+    </small>
+    <h6 class="text-center">戦国大戦＠武将カード検索 / <a href="https://twitter.com/contee213">@contee213</a></h6>
   </div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
